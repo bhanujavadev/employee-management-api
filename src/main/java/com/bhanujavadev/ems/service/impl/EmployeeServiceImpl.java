@@ -3,9 +3,11 @@ package com.bhanujavadev.ems.service.impl;
 import com.bhanujavadev.ems.dto.request.EmployeeRequest;
 import com.bhanujavadev.ems.dto.response.EmployeeResponse;
 import com.bhanujavadev.ems.entity.Department;
+import com.bhanujavadev.ems.entity.Designation;
 import com.bhanujavadev.ems.entity.Employee;
 import com.bhanujavadev.ems.mapper.EmployeeMapper;
 import com.bhanujavadev.ems.repository.DepartmentRepository;
+import com.bhanujavadev.ems.repository.DesignationRepository;
 import com.bhanujavadev.ems.repository.EmployeeRepository;
 import com.bhanujavadev.ems.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
+    private final DesignationRepository designationRepository;
     private final EmployeeMapper employeeMapper;
 
     @Override
@@ -28,7 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Department department = departmentRepository.findById(request.getDepartmentId())
                 .orElseThrow(() -> new EntityNotFoundException("Department not found"));
 
-        Employee employee = employeeMapper.toEntity(request, department);
+        Designation designation = designationRepository.findById(request.getDesignationId())
+                .orElseThrow(() -> new EntityNotFoundException("Designation not found"));
+
+        Employee employee = employeeMapper.toEntity(request);
+
+        employee.setDepartment(department);
+        employee.setDesignation(designation);
 
         Employee savedEmployee = employeeRepository.save(employee);
 
@@ -62,18 +71,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Department department = departmentRepository.findById(request.getDepartmentId())
                 .orElseThrow(() -> new EntityNotFoundException("Department not found"));
 
-        employee.setEmployeeCode(request.getEmployeeCode());
-        employee.setFirstName(request.getFirstName());
-        employee.setLastName(request.getLastName());
-        employee.setEmail(request.getEmail());
-        employee.setMobileNumber(request.getMobileNumber());
-        employee.setGender(request.getGender());
-        employee.setDateOfBirth(request.getDateOfBirth());
-        employee.setJoiningDate(request.getJoiningDate());
-        employee.setDesignation(request.getDesignation());
-        employee.setSalary(request.getSalary());
-        employee.setActive(request.getActive());
+        Designation designation = designationRepository.findById(request.getDesignationId())
+                .orElseThrow(() -> new EntityNotFoundException("Designation not found"));
+
+        employeeMapper.updateEntity(employee, request);
+
         employee.setDepartment(department);
+        employee.setDesignation(designation);
 
         Employee updatedEmployee = employeeRepository.save(employee);
 
@@ -88,5 +92,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.delete(employee);
     }
-
 }

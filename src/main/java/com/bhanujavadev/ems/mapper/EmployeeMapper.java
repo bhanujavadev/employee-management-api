@@ -2,14 +2,13 @@ package com.bhanujavadev.ems.mapper;
 
 import com.bhanujavadev.ems.dto.request.EmployeeRequest;
 import com.bhanujavadev.ems.dto.response.EmployeeResponse;
-import com.bhanujavadev.ems.entity.Department;
 import com.bhanujavadev.ems.entity.Employee;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EmployeeMapper {
 
-    public Employee toEntity(EmployeeRequest request, Department department) {
+    public Employee toEntity(EmployeeRequest request) {
 
         return Employee.builder()
                 .employeeCode(request.getEmployeeCode())
@@ -20,32 +19,52 @@ public class EmployeeMapper {
                 .gender(request.getGender())
                 .dateOfBirth(request.getDateOfBirth())
                 .joiningDate(request.getJoiningDate())
-                .designation(request.getDesignation())
                 .salary(request.getSalary())
                 .active(request.getActive())
-                .department(department)
                 .build();
     }
 
     public EmployeeResponse toResponse(Employee employee) {
 
-        return EmployeeResponse.builder()
-                .id(employee.getId())
-                .employeeCode(employee.getEmployeeCode())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .email(employee.getEmail())
-                .mobileNumber(employee.getMobileNumber())
-                .gender(employee.getGender())
-                .dateOfBirth(employee.getDateOfBirth())
-                .joiningDate(employee.getJoiningDate())
-                .designation(employee.getDesignation())
-                .salary(employee.getSalary())
-                .active(employee.getActive())
-                .departmentName(employee.getDepartment().getDepartmentName())
-                .createdAt(employee.getCreatedAt())
-                .updatedAt(employee.getUpdatedAt())
-                .build();
+        EmployeeResponse response = new EmployeeResponse();
+
+        response.setId(employee.getId());
+        response.setEmployeeCode(employee.getEmployeeCode());
+        response.setFirstName(employee.getFirstName());
+        response.setLastName(employee.getLastName());
+        response.setEmail(employee.getEmail());
+        response.setMobileNumber(employee.getMobileNumber());
+        response.setGender(employee.getGender());
+        response.setDateOfBirth(employee.getDateOfBirth());
+        response.setJoiningDate(employee.getJoiningDate());
+        response.setSalary(employee.getSalary());
+        response.setActive(employee.getActive());
+
+        if (employee.getDepartment() != null) {
+            response.setDepartmentName(employee.getDepartment().getDepartmentName());
+        }
+
+        if (employee.getDesignation() != null) {
+            response.setDesignationName(employee.getDesignation().getDesignationName());
+        }
+
+        response.setCreatedAt(employee.getCreatedAt());
+        response.setUpdatedAt(employee.getUpdatedAt());
+
+        return response;
     }
 
+    public void updateEntity(Employee employee, EmployeeRequest request) {
+
+        employee.setEmployeeCode(request.getEmployeeCode());
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setEmail(request.getEmail());
+        employee.setMobileNumber(request.getMobileNumber());
+        employee.setGender(request.getGender());
+        employee.setDateOfBirth(request.getDateOfBirth());
+        employee.setJoiningDate(request.getJoiningDate());
+        employee.setSalary(request.getSalary());
+        employee.setActive(request.getActive());
+    }
 }
