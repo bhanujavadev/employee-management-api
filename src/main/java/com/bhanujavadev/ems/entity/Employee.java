@@ -20,38 +20,47 @@ public class Employee extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(name = "employee_code", nullable = false, unique = true, length = 20)
     private String employeeCode;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true, length = 15)
+    @Column(name = "mobile_number", nullable = false, length = 15)
     private String mobileNumber;
 
-    @Column(length = 10)
+    @Column(nullable = false, length = 20)
     private String gender;
 
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(name = "joining_date")
     private LocalDate joiningDate;
-
-    @Column(nullable = false)
-    private String designation;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal salary;
 
     @Column(nullable = false)
-    private Boolean active;
+    @Builder.Default
+    private Boolean active = true;
+
+    // ==========================
+    // Relationships
+    // ==========================
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "designation_id", nullable = false)
+    private Designation designation;
+
 }

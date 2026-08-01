@@ -1,14 +1,14 @@
 package com.bhanujavadev.ems.dto.response;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
-@Builder
+@Getter
+@Setter
 public class EmployeeResponse {
 
     private Long id;
@@ -29,15 +29,16 @@ public class EmployeeResponse {
 
     private LocalDate joiningDate;
 
-    private String designation;
-
     private BigDecimal salary;
 
     private Boolean active;
 
     private String departmentName;
 
+    private String designationName;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
 }

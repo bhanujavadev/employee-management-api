@@ -1,13 +1,14 @@
 package com.bhanujavadev.ems.dto.request;
 
 import jakarta.validation.constraints.*;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 public class EmployeeRequest {
 
     @NotBlank
@@ -35,9 +36,6 @@ public class EmployeeRequest {
     @NotNull
     private LocalDate joiningDate;
 
-    @NotBlank
-    private String designation;
-
     @NotNull
     @DecimalMin("0.0")
     private BigDecimal salary;
@@ -47,4 +45,8 @@ public class EmployeeRequest {
 
     @NotNull
     private Long departmentId;
+
+    @NotNull
+    private Long designationId;
+
 }
