@@ -47,6 +47,8 @@ public class EmployeeMapper {
         if (employee.getDesignation() != null) {
             response.setDesignationName(employee.getDesignation().getDesignationName());
         }
+        response.setPhotoUrl(employee.getPhotoUrl());
+        response.setResumeUrl(employee.getResumeUrl());
 
         response.setCreatedAt(employee.getCreatedAt());
         response.setUpdatedAt(employee.getUpdatedAt());

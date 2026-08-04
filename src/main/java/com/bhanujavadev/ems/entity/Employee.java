@@ -62,5 +62,13 @@ public class Employee extends AuditEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "designation_id", nullable = false)
     private Designation designation;
+    @Column(name = "photo_url")
+    private String photoUrl;
+
+    @Column(name = "resume_url")
+    private String resumeUrl;
+    private String photo;
+
+    private String resume;
 
 }
