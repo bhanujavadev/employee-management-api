@@ -17,6 +17,7 @@ public class ApiResponse<T> {
 
     private T data;
 
+    // Success with Data
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .success(true)
@@ -25,17 +26,26 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    // Success with Custom Message
     public static <T> ApiResponse<T> success(String message) {
         return ApiResponse.<T>builder()
                 .success(true)
                 .message(message)
+                .data(null)
                 .build();
     }
 
-    public static <T> ApiResponse<T> failure(String message) {
+    // Error Response
+    public static <T> ApiResponse<T> error(String message) {
         return ApiResponse.<T>builder()
                 .success(false)
                 .message(message)
+                .data(null)
                 .build();
+    }
+
+    // (Optional) Backward compatibility
+    public static <T> ApiResponse<T> failure(String message) {
+        return error(message);
     }
 }
