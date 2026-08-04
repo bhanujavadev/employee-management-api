@@ -8,6 +8,7 @@ spring:
     password: bhanu#1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -35,3 +36,9 @@ logging:
   level:
     org.springframework.web: INFO
     org.hibernate.SQL: DEBUG
+
+application:
+  security:
+    jwt:
+      secret-key: VGhpc0lzQVN1cGVyU2VjcmV0S2V5Rm9ySldUQXV0aGVudGljYXRpb25UaGF0SXNMb25nRW5vdWdoMTIzNDU2
+      expiration: 86400000

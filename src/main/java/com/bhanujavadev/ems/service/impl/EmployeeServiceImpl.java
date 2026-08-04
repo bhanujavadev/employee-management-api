@@ -12,9 +12,8 @@ import com.bhanujavadev.ems.repository.EmployeeRepository;
 import com.bhanujavadev.ems.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,9 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setDepartment(department);
         employee.setDesignation(designation);
 
-        Employee savedEmployee = employeeRepository.save(employee);
-
-        return employeeMapper.toResponse(savedEmployee);
+        return employeeMapper.toResponse(employeeRepository.save(employee));
     }
 
     @Override
@@ -54,12 +51,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeResponse> getAllEmployees() {
+    public Page<EmployeeResponse> getAllEmployees(
+            int page,
+            int size,
+            String sortBy,
+            String direction) {
 
-        return employeeRepository.findAll()
-                .stream()
-                .map(employeeMapper::toResponse)
-                .toList();
+        Sort sort = direction.equalsIgnoreCase("desc")
+                ? Sort.by(sortBy).descending()
+                : Sort.by(sortBy).ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return employeeRepository.findAll(pageable)
+                .map(employeeMapper::toResponse);
     }
 
     @Override
@@ -79,9 +84,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setDepartment(department);
         employee.setDesignation(designation);
 
-        Employee updatedEmployee = employeeRepository.save(employee);
-
-        return employeeMapper.toResponse(updatedEmployee);
+        return employeeMapper.toResponse(employeeRepository.save(employee));
     }
 
     @Override

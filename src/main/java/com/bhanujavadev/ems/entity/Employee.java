@@ -55,11 +55,11 @@ public class Employee extends AuditEntity {
     // Relationships
     // ==========================
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "designation_id", nullable = false)
     private Designation designation;
 

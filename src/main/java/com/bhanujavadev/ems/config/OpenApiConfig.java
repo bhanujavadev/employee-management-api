@@ -1,51 +1,52 @@
 package com.bhanujavadev.ems.config;
 
-import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfig {
 
+    private static final String SECURITY_SCHEME_NAME = "Bearer Authentication";
+
     @Bean
-    public OpenAPI employeeManagementOpenAPI() {
+    public OpenAPI customOpenAPI() {
 
         return new OpenAPI()
 
                 .info(new Info()
 
-                        .title("Employee Management API")
+                        .title("Employee Management System API")
 
-                        .description("""
-                                Enterprise Employee Management System
-                                
-                                Features:
-                                • Department Management
-                                • Employee Management
-                                • Role Management
-                                • User Management
-                                • JWT Authentication
-                                • Spring Security
-                                • Swagger Documentation
-                                """)
+                        .version("1.0")
 
-                        .version("v1.0")
+                        .description("Production Ready Employee Management REST API")
 
                         .contact(new Contact()
+
                                 .name("Bhanupriya Kunchem")
-                                .email("bhanukuchem801@gmail.com")
-                                .url("https://github.com/bhanujavadev"))
 
-                        .license(new License()
-                                .name("MIT License")
-                                .url("https://opensource.org/licenses/MIT")))
+                                .email("bhanukuchem801@gmail.com")))
 
-                .externalDocs(new ExternalDocumentation()
-                        .description("GitHub Repository")
-                        .url("https://github.com/bhanujavadev/employee-management-api"));
+                .addSecurityItem(
+                        new SecurityRequirement()
+                                .addList(SECURITY_SCHEME_NAME))
+
+                .schemaRequirement(
+                        SECURITY_SCHEME_NAME,
+
+                        new SecurityScheme()
+
+                                .name(SECURITY_SCHEME_NAME)
+
+                                .type(SecurityScheme.Type.HTTP)
+
+                                .scheme("bearer")
+
+                                .bearerFormat("JWT"));
     }
 }
