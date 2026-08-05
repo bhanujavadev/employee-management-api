@@ -5,25 +5,28 @@ A production-ready Employee Management System REST API built using **Java 21**, 
 This project demonstrates enterprise-level backend development with authentication, role-based authorization, employee management, file upload/download, pagination, sorting, searching, filtering, and global exception handling.
 
 ---
-
 ## 📌 Project Features
 
 - 🔐 JWT Authentication
 - 👥 Role-Based Authorization (ADMIN / HR)
 - 👨‍💼 Employee CRUD Operations
+- 🏢 Department CRUD
+- 💼 Designation CRUD
 - 🔍 Employee Search
 - 🎯 Dynamic Filtering
 - 📄 Pagination & Sorting
+- 📊 Dashboard Analytics
 - 📤 Photo Upload
 - 📥 Photo Download
 - 📄 Resume Upload
 - 📥 Resume Download
+- 📑 Excel Report Export
+- 📄 PDF Report Export
 - ✅ Request Validation
 - ⚠️ Global Exception Handling
 - 📚 Swagger API Documentation
 - 🗄️ MySQL Database
 - 📦 RESTful APIs
----
 
 ## 🛠️ Tech Stack
 
@@ -167,13 +170,39 @@ You can test all REST APIs using Swagger UI.
 - Download Photo
 - Upload Resume
 - Download Resume
+### Dashboard
+
+- Get Dashboard Statistics
+
+### Reports
+
+- Export Employees to Excel
+- Export Employees to PDF
 
 ---
+## 🏗️ Architecture
+
+Client
+↓
+
+Spring Boot REST API
+↓
+
+Spring Security + JWT
+↓
+
+Service Layer
+↓
+
+Repository Layer (JPA)
+
+↓
+
+MySQL Database
+
 ## 🚀 Future Enhancements
 
-- 📊 Dashboard APIs
-- 📄 Excel Export
-- 📑 PDF Export
+-
 - 📧 Email Notifications
 - 🧪 Unit Testing (JUnit & Mockito)
 - 🐳 Docker Support
