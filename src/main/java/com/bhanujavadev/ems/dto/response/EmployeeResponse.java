@@ -40,5 +40,8 @@ public class EmployeeResponse {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+    private String photoUrl;
+
+    private String resumeUrl;
 
 }
