@@ -29,4 +29,16 @@ public class ReportController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excel);
     }
+    @GetMapping("/employees/pdf")
+    @PreAuthorize("hasAnyRole('ADMIN','HR')")
+    public ResponseEntity<byte[]> exportEmployeesToPdf() {
+
+        byte[] pdf = reportService.exportEmployeesToPdf();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=employees.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
+    }
 }
