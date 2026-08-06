@@ -23,6 +23,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSp
 
     long countByActiveFalse();
 
+
     long countByJoiningDateBetween(LocalDate startDate, LocalDate endDate);
 
     boolean existsByEmployeeCode(String employeeCode);

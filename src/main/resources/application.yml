@@ -3,21 +3,19 @@ spring:
     name: employee-management-api
 
   datasource:
-    url: jdbc:mysql://localhost:3306/employee_management_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata
+    url: jdbc:mysql://localhost:3306/employee_management_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
     username: root
-    password: bhanu#1234
+    password: "bhanu#1234"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  jpa:
+jpa:
+  hibernate:
+    ddl-auto: update
+  show-sql: true
+  properties:
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    open-in-view: false
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
-
+      dialect: org.hibernate.dialect.MySQLDialect
+      format_sql: true
   jackson:
     time-zone: Asia/Kolkata
 

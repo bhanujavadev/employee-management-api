@@ -7,7 +7,9 @@ public final class DateUtil {
     private DateUtil() {
     }
 
-    public static LocalDateTime now() {
+    public static LocalDateTime now()
+    {
+
         return LocalDateTime.now();
     }
 
