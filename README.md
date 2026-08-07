@@ -119,7 +119,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/employee_management_db
     username: root
-    password: your_password
+    password: bhanu#1234
 ```
 
 ### 4. Run the Application
