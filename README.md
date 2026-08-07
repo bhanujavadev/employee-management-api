@@ -475,7 +475,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/employee_management_db
     username: root
-    password: your_password
+    password: bhanu#1234
 
 ⚠️ Replace your_password with your local MySQL password.
 
@@ -610,10 +610,6 @@ Bhanupriya Kunchem
 🔗 GitHub
 
 https://github.com/bhanujavadev
-
-🔗 LinkedIn
-
-Add your LinkedIn profile URL here.
 
 🟣 📄 License
 
